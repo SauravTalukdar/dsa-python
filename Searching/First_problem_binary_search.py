@@ -52,13 +52,13 @@
 
 # 7.handling an edge case where there multiple numbers repeating and our find number is also repeating(finding its first occurence)
 
-cards = [8,8,6,6,6,6,6,6,3,2,2,2,0,0,0]
-find = 6
 def test_location(cards,find,mid):
     mid_number = cards[mid]
     print("mid :",mid,"mid number :",mid_number)
     if mid_number == find:
-        if cards[mid-1] == find:
+        #we check if left number of mid number is also same as 'find' 
+        # and we did mid-1 >=0 to see if our index is valid and not the first 0th position of our list 
+        if mid-1 >= 0 and cards[mid-1] == find: 
             return "left"
         else:
             return "found"
@@ -66,7 +66,6 @@ def test_location(cards,find,mid):
         return "left"
     else:
         return "right"
-
 
 def locate_card(cards,find):
     
@@ -83,7 +82,10 @@ def locate_card(cards,find):
         elif result == "left":
             high = mid - 1
     return -1
-
+    
+# example  
+cards = [8,8,6,6,6,6,6,6,3,2,2,2,0,0,0]
+find = 6
 print(locate_card(cards,find))           
         
                         
