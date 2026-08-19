@@ -1,4 +1,10 @@
-# the brute for way to do it
+# Problem: Two sum
+# Leetcode: #1
+# Difficulty: Easy
+# Time complexity: O(n^2)
+# Space complexity: O(1)
+# Approch: Brute force(checking every pairs)
+
 
 def two_sum(nums,target):
     last = len(nums)
@@ -11,30 +17,24 @@ def two_sum(nums,target):
 # test cases
 
 # 1.
-nums = [2,7,11,15]
-target = 9
-print(two_sum(nums,target))
+print(two_sum([2,7,11,15],9))
+# output: [0,1]
 
 #2.
-nums = [3,2,4]
-target = 6
-print(two_sum(nums,target))
+print(two_sum([3,2,4],6))
+# output: [1,2]
 
 #3.
-nums = [3,3]
-target = 6
-print(two_sum(nums,target))
+print(two_sum([3,3],6))
+# output: [0,1]
 
 #4.
-nums = [2,7,11,15]
-target = 13
-print(two_sum(nums,target))
+print(two_sum([2,7,11,15],13))
+# output: [0,2]
 
 #5.
-nums = []
-target = 6
-print(two_sum(nums,target))
-
+print(two_sum([],6))
+# output: [-1]
 
 
            
