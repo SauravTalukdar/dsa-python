@@ -13,8 +13,8 @@ def first_position(nums,target):
         mid = (low + high) // 2
         mid_number = nums[mid]
         if mid_number == target:
-                result = mid
-                high = mid - 1      
+            result = mid
+            high = mid - 1      
         elif mid_number < target:
             low = mid + 1
         else:
@@ -30,8 +30,8 @@ def last_position(nums,target):
         mid = (low + high) // 2
         mid_number = nums[mid]
         if mid_number == target:
-                result = mid
-                low = mid + 1  
+            result = mid
+            low = mid + 1  
         elif mid_number > target:
             high = mid - 1
         else:
