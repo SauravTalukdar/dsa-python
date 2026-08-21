@@ -1,0 +1,1 @@
+# we have to determine the minimum number of times a list has been rotated to obtain the given list 
