@@ -29,4 +29,16 @@ print(rotate([]))
 print(rotate([7,9,1,3,5]))
 #5.
 print(rotate([3,5,7,9,1]))
+print(rotate([1]))
+
+# Approach: Brute force(linear search) - find index of minimum element compare mid with high to determine which half to search
+def rotated_list(nums):
+    position = 0
+    while(position<len(nums)):
+        if position > 0  and nums[position] < nums[position - 1]:
+            return position
+        position +=1
+    return 0
+
+           
 
