@@ -9,7 +9,6 @@ def rotate(rotated_list):
     high = len(rotated_list) - 1
     while(low<=high):
         mid = (low+high) // 2
-        mid_number = rotated_list[mid]
         if low == high:
             return mid
         if rotated_list[mid] > rotated_list[high]:
@@ -29,6 +28,7 @@ print(rotate([]))
 print(rotate([7,9,1,3,5]))
 #5.
 print(rotate([3,5,7,9,1]))
+#6.
 print(rotate([1]))
 
 # Approach: Brute force(linear search) - find index of minimum element compare mid with high to determine which half to search
