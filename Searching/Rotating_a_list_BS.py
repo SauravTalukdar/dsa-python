@@ -12,7 +12,7 @@ def rotate1(rotated_list):
         mid = (low+high) // 2
         if low == high:
             return mid
-        if rotated_list[mid] > rotated_list[high]:
+        elif rotated_list[mid] > rotated_list[high]:
             low = mid + 1
         else:
             high = mid 
