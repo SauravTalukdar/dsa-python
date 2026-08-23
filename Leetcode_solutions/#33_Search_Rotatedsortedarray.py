@@ -23,15 +23,15 @@ def search(nums,target):
         mid_number = nums[mid]
         if mid_number == target:
             return mid
-        elif mid_number >= nums[low]:
-            if nums[low] <= target < nums[mid]:
-                high = mid - 1 
-            else:
+        elif mid_number >= nums[low]: #check if the left half is sorted(including mid)
+            if nums[low] <= target < nums[mid]: #check if target in this half
+                high = mid - 1 #if it is search the left half
+            else: #if its not search the left half(unsorted at first,but when loop runs again it also has a part which is sorted)
                 low = mid + 1
-        elif mid_number < nums[low]:
-            if nums[mid] < target <= nums[high]:
-                low = mid + 1 
-            else:
+        elif mid_number < nums[low]: #check if the right half is sorted
+            if nums[mid] < target <= nums[high]: #check if target is in this half
+                low = mid + 1 #if it is in right half
+            else: #if its not in right half
                 high = mid - 1              
     return - 1            
 
