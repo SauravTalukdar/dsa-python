@@ -10,4 +10,16 @@ class User: #created a user class to store of users
     def __str__(self):
         return self.__repr__()
 
-                
+
+class UserDatabase:
+    def insert(self,user):
+        pass
+    def find(self,username):
+        pass
+    def update(self,user):
+        pass
+    def list_all(self):
+        pass
+
+
+
