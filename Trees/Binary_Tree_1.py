@@ -1,17 +1,17 @@
-class User: #created a user class to store of users 
+class User: #created a user class to store of users (input)
     def __init__(self,username,name,email):
         self.username = username
         self.name = name
         self.email = email
 
     def __repr__(self):
-        return f"Username {self.username}, name {self.name}, email {self.email}"
+        return f"Username: {self.username}, name: {self.name}, email: {self.email}"
 
     def __str__(self):
         return self.__repr__()
 
 
-class UserDatabase:
+class UserDatabase: #user database class for methods 
     def __init__(self):
         self.users = []
     def insert(self,user):
@@ -32,6 +32,8 @@ class UserDatabase:
     def list_all(self):
         return self.users
 
+#creating some users
+
 aakash = User('aakash', 'Aakash Rai', 'aakash@example.com')
 biraj = User('biraj', 'Biraj Das', 'biraj@example.com')
 hemanth = User('hemanth', 'Hemanth Jain', 'hemanth@example.com')
@@ -40,7 +42,25 @@ siddhant = User('siddhant', 'Siddhant Sinha', 'siddhant@example.com')
 sonaksh = User('sonaksh', 'Sonaksh Kumar', 'sonaksh@example.com')
 vishal = User('vishal', 'Vishal Goel', 'vishal@example.com')
 
-users = [aakash,biraj,hemanth,jadhesh,siddhant,sonaksh,vishal]
+users = [aakash,biraj,hemanth,jadhesh,siddhant,sonaksh,vishal] #optional for now as we directly insert users in self.users
+
+database = UserDatabase() #created a database object for the use of methods
+
+#1. inserting some users
+database.insert(hemanth)
+database.insert(siddhant)
+database.insert(aakash)
+
+#2. Finding a user
+found_user = database.find("hemanth")
+print(found_user)
+
+#3. Updating a users details
+database.update(User("hemanth","hemu","hello@gmail"))
+print(hemanth)
+
+#4. Listing all the user details
+print(database.list_all())
 
 
 
