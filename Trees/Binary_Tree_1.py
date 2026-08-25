@@ -12,14 +12,25 @@ class User: #created a user class to store of users
 
 
 class UserDatabase:
+    def __init__(self):
+        self.users = []
     def insert(self,user):
-        pass
+        i = 0
+        while i < len(self.users):
+            if self.users[i].username > user.username:
+                break
+            i += 1
+        self.users.insert(i,user)    
     def find(self,username):
-        pass
+        for user in self.users:
+            if user.username == username:
+                return user
     def update(self,user):
-        pass
+        target = self.find(user.username)
+        target.name = user.name
+        target.email = user.email
     def list_all(self):
-        pass
+        return self.users
 
 aakash = User('aakash', 'Aakash Rai', 'aakash@example.com')
 biraj = User('biraj', 'Biraj Das', 'biraj@example.com')
@@ -28,4 +39,8 @@ jadhesh = User('jadhesh', 'Jadhesh Verma', 'jadhesh@example.com')
 siddhant = User('siddhant', 'Siddhant Sinha', 'siddhant@example.com')
 sonaksh = User('sonaksh', 'Sonaksh Kumar', 'sonaksh@example.com')
 vishal = User('vishal', 'Vishal Goel', 'vishal@example.com')
+
+users = [aakash,biraj,hemanth,jadhesh,siddhant,sonaksh,vishal]
+
+
 
