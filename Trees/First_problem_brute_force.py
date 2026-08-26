@@ -38,18 +38,23 @@ aakash = User('aakash', 'Aakash Rai', 'aakash@example.com')
 biraj = User('biraj', 'Biraj Das', 'biraj@example.com')
 hemanth = User('hemanth', 'Hemanth Jain', 'hemanth@example.com')
 jadhesh = User('jadhesh', 'Jadhesh Verma', 'jadhesh@example.com')
-siddhant = User('siddhant', 'Siddhant Sinha', 'siddhant@example.com')
 sonaksh = User('sonaksh', 'Sonaksh Kumar', 'sonaksh@example.com')
 vishal = User('vishal', 'Vishal Goel', 'vishal@example.com')
+saurav = User("saurav","sauravtalukdar","saurav@gmail")            
+tanushka = User("tanushka","tanushkaroy","tanushka@gmail")            
+bibek = User("bibek","bibekroy","bibek@gmail")            
+raktim = User("raktim","raktimborah","raktim@gmail")  
 
-users = [aakash,biraj,hemanth,jadhesh,siddhant,sonaksh,vishal] #optional for now as we directly insert users in self.users
+users = [aakash,biraj,hemanth,jadhesh,bibek,sonaksh,vishal] #optional for now as we directly insert users in self.users
 
 database = UserDatabase() #created a database object for the use of methods
 
 #1. inserting some users
 database.insert(hemanth)
-database.insert(siddhant)
+database.insert(bibek)
 database.insert(aakash)
+database.insert(saurav)
+database.insert(tanushka)
 
 #2. Finding a user
 found_user = database.find("hemanth")
