@@ -9,6 +9,11 @@ node0 = Treenode(3) #root node
 node1 = Treenode(4)        
 node2 = Treenode(5)
 
-node0.left = node1 #connecting node0 left to node1
-node0.right = node2 #connecting node0 right to node2
+node0.left = node1 #connecting node0 left to node1(manually)
+node0.right = node2 #connecting node0 right to node2(manually)
+
+root = node0 #stored node0 in root as root node
+print(root.key)
+print(root.left.key)
+print(root.right.key)
 
