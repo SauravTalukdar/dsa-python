@@ -1,3 +1,9 @@
+# Problem: Handling a dtabase of users(inserting,finding,updating,listing)
+# Time complexity: O(n)
+# Space complexity: O(1)
+# Approch: Brute force
+
+
 class User: #created a user class to store of users (input)
     def __init__(self,username,name,email):
         self.username = username
