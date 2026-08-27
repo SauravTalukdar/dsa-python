@@ -39,10 +39,23 @@ def parse_tuple(data): #this takes a tuple like the above one
     return node
 
 tree = parse_tuple(tree_tuple)
-print(tree.key)
-print(tree.left.key,tree.right.key)
-print(tree.left.left.key,tree.left.right,tree.right.left.key,tree.right.right.key)
-print(tree.right.left.right.key,tree.right.right.left.key,tree.right.right.right.key)
+# print(tree.key)
+# print(tree.left.key,tree.right.key)
+# print(tree.left.left.key,tree.left.right,tree.right.left.key,tree.right.right.key)
+# print(tree.right.left.right.key,tree.right.right.left.key,tree.right.right.right.key)
+
+def display_keys(node,space='\t',level=0):
+    if node is None:
+        print(space*level + 'Ø')
+        return
+    if node.left is None and node.right is None:
+        print(space*level + str(node.key))
+        return
+    display_keys(node.right,space,level+1)
+    print(space*level + str(node.key))
+    display_keys(node.left,space,level+1)
+
+display_keys(tree)    
 
 
 
