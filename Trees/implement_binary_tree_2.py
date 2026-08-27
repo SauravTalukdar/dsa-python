@@ -44,6 +44,7 @@ tree = parse_tuple(tree_tuple)
 # print(tree.left.left.key,tree.left.right,tree.right.left.key,tree.right.right.key)
 # print(tree.right.left.right.key,tree.right.right.left.key,tree.right.right.right.key)
 
+#for visual representation
 def display_keys(node,space='\t',level=0):
     if node is None:
         print(space*level + 'Ø')
