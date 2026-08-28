@@ -1,6 +1,13 @@
+# Problem: Binary tree inOrder traversal
+# Leetcode: #94
+# Difficulty: Easy
+# Time complexity: O(n)
+# Space complexity: O(n)
+# Approch: Recursive depth first search
+
 class TreeNode:
-    def __init__(self,key):
-        self.key = key
+    def __init__(self,val):
+        self.val = val
         self.left = None
         self.right = None
 
@@ -8,7 +15,7 @@ class Solution:
     def traverse_in_order(self,node):
         if node is None: #if node/subtree is empty return an empty list
             return []
-        return (self.traverse_in_order(node.left) + [node.key] + self.traverse_in_order(node.right))
+        return (self.traverse_in_order(node.left) + [node.val] + self.traverse_in_order(node.right))
                 
 
 tree_tuple = ((1,3,None),2,((None,3,4),5,(6,7,8))) 
