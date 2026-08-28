@@ -1,4 +1,4 @@
-# Problem: Binary tree preOrder traversal
+# Problem: Binary tree PreOrder traversal
 # Leetcode: #144
 # Difficulty: Easy
 # Time complexity: O(n)
