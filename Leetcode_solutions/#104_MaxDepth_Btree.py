@@ -30,9 +30,10 @@ tree = parse_tuple(tree_tuple)
 def traverse_height(node):
     if node is None:
         return -1   
-    left_height = traverse_height(node.left) 
-    right_height = traverse_height(node.right)
-    return 1 + max(left_height,right_height)    
+    # left_height = traverse_height(node.left) 
+    # right_height = traverse_height(node.right)
+    return 1 + max(traverse_height(node.left),traverse_height(node.right)) #we can pass the left_height and right_height or 
+                                                                            #pass it like this  
 
 print(traverse_height(tree))    
             
