@@ -71,3 +71,16 @@ insert(tree1,saurav.username,saurav)
 insert(tree1,tanushka.username,tanushka)
 
 display_keys(tree1)
+
+#creating a skewed/unbalanced tree (we dont want this to happen)
+#this happens when we insert keys in ascending order,it makes the time complexity O(n) otherwise O(logn),
+# (which defeats the purpose of BST)
+
+tree2 = insert(None,aakash.username,aakash)
+insert(tree2,bibek.username,bibek)
+insert(tree2,hemanth.username,hemanth)
+insert(tree2,jadhesh.username,jadhesh)
+insert(tree2,saurav.username,saurav)
+insert(tree2,tanushka.username,tanushka)
+
+display_keys(tree2)
