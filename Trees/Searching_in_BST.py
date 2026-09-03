@@ -80,3 +80,13 @@ node1 = search(tree1,'bhanita')
 print(node1)
 
 
+#updating a node
+def update(node,key,value):
+    target = search(node,key)
+    if target is not None:
+        target.value = value
+
+update(tree1,'saurav',User('saurav','meSaurav','saurav@12345'))
+node2 = search(tree1,'saurav')
+print(node2.value)
+
