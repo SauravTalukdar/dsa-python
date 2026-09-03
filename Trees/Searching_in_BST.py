@@ -90,3 +90,13 @@ update(tree1,'saurav',User('saurav','meSaurav','saurav@12345'))
 node2 = search(tree1,'saurav')
 print(node2.value)
 
+
+#listing all nodes
+def list_all(node):
+    if node is None:
+        return []
+    return list_all(node.left) + [node.key,node.value] + list_all(node.right)
+
+print(list_all(tree1))        
+
+
