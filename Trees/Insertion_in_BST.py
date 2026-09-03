@@ -40,13 +40,17 @@ def display_keys(node,space='\t',level=0):
     print(space*level + str(node.key))
     display_keys(node.left,space,level+1)
 
-#manual insertion
+#Approch1 : manual insertion
 tree = BSTNode(jadhesh.username,jadhesh)
 tree.left = BSTNode(bibek.username,bibek)  
-tree.right = BSTNode(saurav.username,saurav)  
+tree.right = BSTNode(saurav.username,saurav)
+tree.left.right = BSTNode(biraj.username,biraj)  
+tree.right.right = BSTNode(tanushka.username,tanushka)
+
+display_keys(tree)
 
 
-#creating a function to insert
+#Approach2 : creating a function to insert
 def insert(node,key,value):
     if node is None:
         node = BSTNode(key,value)
