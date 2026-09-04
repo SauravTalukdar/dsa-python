@@ -79,7 +79,6 @@ print(node.key,node.value)
 node1 = search(tree1,'bhanita')
 print(node1)
 
-
 #updating a node
 def update(node,key,value):
     target = search(node,key)
@@ -90,7 +89,6 @@ update(tree1,'saurav',User('saurav','meSaurav','saurav@12345'))
 node2 = search(tree1,'saurav')
 print(node2.value)
 
-
 #listing all nodes
 def list_all(node):
     if node is None:
@@ -98,5 +96,3 @@ def list_all(node):
     return list_all(node.left) + [node.key,node.value] + list_all(node.right)
 
 print(list_all(tree1))        
-
-

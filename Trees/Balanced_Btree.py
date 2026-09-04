@@ -1,7 +1,7 @@
 #to check if a Binary tree is balanced we check ->
 #1.Ensure the left subtree is balanced
 #2.Ensure the right subtree is balanced
-#3.Ensure the difference in height of left and right subtree is not more than 1,i.e, <=1
+#3.Ensure the difference in height of left and right subtree is not more than 1,i.e, <=1(condition for balance)
 
 class BSTNode:
     def __init__(self,key,value = None):
@@ -73,6 +73,18 @@ insert(tree2,hemanth.username,hemanth)
 insert(tree2,saurav.username,saurav)                
 insert(tree2,tanushka.username,tanushka)
 
+#3.
+tree3 = insert(None,jadhesh.username,jadhesh)
+insert(tree3,biraj.username,biraj)                
+insert(tree3,sonaksh.username,sonaksh)                
+insert(tree3,aakash.username,aakash)                
+insert(tree3,hemanth.username,hemanth)                
+insert(tree3,saurav.username,saurav)
+insert(tree3,vishal.username,vishal)
+insert(tree3,tanushka.username,tanushka)
+
+
 #output
 print(is_balanced(tree1))
 print(is_balanced(tree2))
+print(is_balanced(tree3))
