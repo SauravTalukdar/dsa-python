@@ -46,6 +46,7 @@ def insert(node,key,value):
     return node
 
 #function to check
+#Approch 1
 def is_balanced(node):
     if node is None:
         return True, 0 #returning True if no nodes and height 0
@@ -53,7 +54,24 @@ def is_balanced(node):
     balanced_r, height_r = is_balanced(node.right)#checking for right
     balanced = balanced_l and balanced_r and abs(height_l - height_r) <= 1 #checking if tree is balanced with the conditions
     height = 1 + max(height_l,height_r)#calculating max height
-    return balanced,height#returning to the function for recursive call and also output  
+    return balanced,height#returning to the function for recursive call and also output 
+
+#Approch 2
+class Solution:
+    def isBalanced(self, root):
+        def height(node):
+            if node is None:
+                return 0
+            left = height(node.left)          
+            right = height(node.right)
+
+            if left == -1 or right == -1: #checks if left or right is not balanced
+                return -1  
+            if abs(left - right) > 1: #checks current node
+                return -1
+            return 1 + max(left,right) #return current height
+
+        return height(root) != -1 #this line gives true or false                    
 
 #test cases
 #1.unbalanced
