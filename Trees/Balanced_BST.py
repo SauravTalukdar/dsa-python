@@ -62,4 +62,4 @@ def display_keys(node,space='\t',level=0):
     print(space*level + str(node.key))
     display_keys(node.left,space,level+1)
 
-display_keys(tree)
+display_keys(tree)    
