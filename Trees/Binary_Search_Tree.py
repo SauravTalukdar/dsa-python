@@ -48,7 +48,7 @@ def is_bst2(node,min_val = float('-inf'),max_val = float('inf')):
         return False
     return (is_bst2(node.left,min_val,node.key) and is_bst2(node.right,node.key,max_val))
 
-print(is_bst2(tree))            
+print(is_bst2(tree))        
 
 
 
