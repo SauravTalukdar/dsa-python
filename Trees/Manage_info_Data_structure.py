@@ -72,7 +72,7 @@ def size(node):
     return 1 + size(node.left) + size(node.right) 
 
 def update(node,key,value):
-    target = search(node,key)
+    target = find(node,key)
     if target is not None:
         target.value = value
 
@@ -118,12 +118,23 @@ User(username='vishal', name='Vishal Goel', email='vishal@example.com')]
 treemap = TreeMap() #creating the object
 
 #inserting the nodes or setting them
-treemap.__setitem__('aakash',User)
-treemap.__setitem__('jadhesh',User)
-treemap.__setitem__('sonaksh',User)
-treemap.__setitem__('saurav',User)
+#not so convinient
+# treemap.__setitem__('aakash',users[0]) 
+# treemap.__setitem__('jadhesh',users[3])
+# treemap.__setitem__('sonaksh',users[5])
 
-print(treemap.__len__())
+#convinient
+treemap['aakash'] = users[0]
+treemap['jadhesh'] = users[3]
+treemap['sonaksh'] = users[5]
+treemap['bibek'] = users[1]
+
+#getting a user info
+print(treemap['bibek'])
+
+#lenght(size) of the tree
+print(len(treemap))
+
 treemap.display()
 
 
