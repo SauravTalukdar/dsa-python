@@ -101,9 +101,9 @@ def delete(node,key):
             succesor.right.parent = succesor.parent
 
 def find_min(node): #helper function to find inorder succesor
-            while node.left is not None:
-                node = node.left
-            return node 
+        while node.left is not None:
+            node = node.left
+        return node 
 
 #1.Delete leaf node
 delete(tree1,'saurav')
