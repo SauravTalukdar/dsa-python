@@ -42,16 +42,23 @@ data_list[get_index(data_list,'Siddhant')] = ('Siddhant','9231325312')
 
 #2.finding a value
 print(data_list[get_index(data_list,'Hemanth')]) #we got the index using the hash function and retrived the key and value
-print(data_list[get_index(data_list,'Saurav')])
+#OR
+idx = get_index(data_list,'Saurav') #getting the index and storing it in idx
+key,value = data_list[idx] #unpacking the key and tuple at the index
+print(value) #getting the value
 
 #3.Updating a value
 data_list[get_index(data_list,'Saurav')] = 'Saurav','8471855733'
 
 #List_all
+#approach1
 for item in data_list:
     if item is not None:
         print(f"Name:{item[0]},Phone:{item[1]}")
 
+#approch2->List comprehension(better)
+phone_number = [item for item in data_list if item is not None]
+print(phone_number)
 
 
 
