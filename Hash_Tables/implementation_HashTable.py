@@ -27,3 +27,31 @@ print(get_index(data_list, 'Saurav'))
 # Now try this — what do you notice?
 print(get_index(data_list, 'Aakash'))
 print(get_index(data_list, 'hsaakA')) #these two give the same indice value but they are different(just changed the order of letters)
+
+#OPERATIONS
+#1.inserting key,value in the hash table
+key,value = 'Aakash','9489484949'
+index = get_index(data_list,key)
+data_list[index] = (key,value)
+
+#the same insertion implementation in a single line of code
+data_list[get_index(data_list,'Hemanth')] = ('Hemanth', '9595949494')
+data_list[get_index(data_list,'Saurav')] = ('Saurav', '8457548856')
+data_list[get_index(data_list,'Aakash')] = ('Aakash','9489484949')
+data_list[get_index(data_list,'Siddhant')] = ('Siddhant','9231325312')
+
+#2.finding a value
+print(data_list[get_index(data_list,'Hemanth')]) #we got the index using the hash function and retrived the key and value
+print(data_list[get_index(data_list,'Saurav')])
+
+#3.Updating a value
+data_list[get_index(data_list,'Saurav')] = 'Saurav','8471855733'
+
+#List_all
+for item in data_list:
+    if item is not None:
+        print(f"Name:{item[0]},Phone:{item[1]}")
+
+
+
+
