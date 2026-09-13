@@ -30,5 +30,10 @@ data_list = [None] * 4096
 data_list[get_valid_index(data_list,'listen')] = 'listen','9489484949' #we insert this at 655
 data_list[get_valid_index(data_list,'silent')] = 'silent','9231325312' #we insert this at 656(which is the next index,cause 655 is occupied)  
 
+data_list[get_valid_index(data_list,'saurav')] = 'saurav','97989898' #we insert this at 658 
+data_list[get_valid_index(data_list,'ausrav')] = 'ausrav','454554' #we insert this at 659(which is the next index,cause 658 is occupied)  
+
 print(get_valid_index(data_list,'listen')) #655
 print(get_valid_index(data_list,'silent')) #656(if there was no key in 655 it would have shown 655)
+print(get_valid_index(data_list,'saurav')) #658
+print(get_valid_index(data_list,'ausrav')) #659(if there was no key in 658(saurav) it would have been 658)
