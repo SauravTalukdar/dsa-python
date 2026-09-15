@@ -26,9 +26,17 @@ def two_sum1(nums,target):
             return [data[complement],index] #return the complements index(data[complement] and the current index)
         data[num] = index #else add the number(num) : index pair in the dict
         index +=1  #keep increasing the loop index(so we can iterate the list)
-    return -1    
+    return -1   
 
+#we can also reduce the manual counter and use enumerate to track the index
 
+def two_sum2(nums,target):
+    data = {}
+    for index,num in enumerate(nums):
+        complement = target - num
+        if complement in data:
+            return [data[complement],index]
+        data[num] = index    
 
 # test cases
 
