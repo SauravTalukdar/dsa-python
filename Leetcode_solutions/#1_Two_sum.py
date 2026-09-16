@@ -22,7 +22,7 @@ def two_sum1(nums,target):
     index = 0 #start from zero
     for num in nums: #loop through the list of nums 
         complement = target - num #find the complement(eg:complement = 9 - 2 = 7,in [2,7,11,15])
-        if complement in data: #if complement in out data dictionary
+        if complement in data: #if complement in our data dictionary
             return [data[complement],index] #return the complements index(data[complement] and the current index)
         data[num] = index #else add the number(num) : index pair in the dict
         index +=1  #keep increasing the loop index(so we can iterate the list)
