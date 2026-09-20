@@ -94,14 +94,12 @@ def partition(nums,start = 0,end = None):
         else:
             nums[l],nums[r] = nums[r],nums[l] #Left element is larger than pivot AND right element is smaller
             #than pivot — both are on wrong sides. Swap them. Both move to correct sides.
-    if nums[l] > nums[end]:
-        nums[l],nums[end] = nums[end],nums[l]
+    if nums[l] > nums[end]: #Loop ended,l is where pivot belongs.
+        nums[l],nums[end] = nums[end],nums[l]#If element at l is greater than pivot,swap pivot into position l.
         return l
     else:
-        return end #Loop ended,l is where pivot belongs.
-        #If element at l is greater than pivot,swap pivot into position l.
-        #otherwise pivot stays at end.Return pivot's final position.                  
-
+        return end #otherwise pivot stays at end.Return pivot's final position.                  
+        
 #testing cases
 
 nums0, output0 = test0['input']['nums'], test0['output']
