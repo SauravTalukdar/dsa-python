@@ -57,19 +57,27 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        i,j,k= m -1,n -1,m+n -1
-        while i >= 0 and j >=0:
-            if nums1[i] > nums2[j]:
-                nums1[k] = nums1[i]
-                i-=1
+        i = m -1 #last real element in nums1 (index m-1)
+        j = n -1 #last element in nums2 (index n-1)
+        k = m+n -1 #last position in nums1 (index m+n-1) — where we place next element
+        #For nums1=[1,2,3,0,0,0], m=3, nums2=[2,5,6], n=3:
+        # i=2 → nums1[2]=3
+        # j=2 → nums2[2]=6
+        # k=5 → nums1[5]=0 (placeholder)
+        while i >= 0 and j >=0: #run till both lists are exhausted(we are backward traversing so we check >=0)
+            if nums1[i] > nums2[j]: #if nums1[i] > #nums2[j]
+                nums1[k] = nums1[i] #place the element num1[i] in k position of nums1
+                i-=1 #move i left
             else:
-                nums1[k] = nums2[j]
-                j-=1
-            k-=1       
-        while j >=0:
-            nums1[k] = nums2[j]
+                nums1[k] = nums2[j] #else place nums2[j] in k position of nums1
+                j-=1 #move j left
+            k-=1 #keep moving k left after each placement, so that next element goes to one place left
+        while j >=0: #remaining elements in nums2
+            nums1[k] = nums2[j] #place them in the nums1[k] directly
             j-=1
-            k-=1
+            k-=1    
+        # Why no tail loop for i?
+        # If i still has elements — they're already in nums1 in the correct positions. No need to move them.    
 
         
 
