@@ -82,6 +82,7 @@ T7 = {
 }
 
 #recursive solution
+#Time complexity - O(2^m+n)
 def len_lcs(seq1,seq2,idx1 = 0,idx2 = 0):
     if idx1 == len(seq1) or idx2 == len(seq2):
         return 0
@@ -92,12 +93,30 @@ def len_lcs(seq1,seq2,idx1 = 0,idx2 = 0):
         option2 = len_lcs(seq1,seq2,idx1,idx2 + 1)
         return max(option1,option2)
 
+#solution with memoization(memorization), we track recurring elements with a dictionary
+def lcs_memo(seq1,seq2):
+    memo = {}
+    def recurse(idx1=0,idx2=0):
+        key = (idx1,idx2)
+        if key in memo:
+            return memo[key]
+        elif idx1 == len(seq1) or idx2 == len(seq2):
+            memo[key] = 0
+        elif seq1[idx1] == seq2[idx2]:
+            memo[key] = 1 + recurse(idx1+1,idx2+1)
+        else:
+            memo[key] = max(recurse(idx1+1,idx2),recurse(idx1,idx2+1))
+        return memo[key]
+    return recurse(0,0)
+                
+                    
+
 #testing
-print(len_lcs(T0['input']['seq1'],T0['input']['seq2']))
-print(len_lcs(T1['input']['seq1'],T1['input']['seq2']))
-print(len_lcs(T2['input']['seq1'],T2['input']['seq2']))
-print(len_lcs(T3['input']['seq1'],T3['input']['seq2']))
-print(len_lcs(T4['input']['seq1'],T4['input']['seq2']))
-print(len_lcs(T5['input']['seq1'],T5['input']['seq2']))
-print(len_lcs(T6['input']['seq1'],T6['input']['seq2']))
-print(len_lcs(T7['input']['seq1'],T7['input']['seq2']))
+print(lcs_memo(T0['input']['seq1'],T0['input']['seq2']))
+print(lcs_memo(T1['input']['seq1'],T1['input']['seq2']))
+print(lcs_memo(T2['input']['seq1'],T2['input']['seq2']))
+print(lcs_memo(T3['input']['seq1'],T3['input']['seq2']))
+print(lcs_memo(T4['input']['seq1'],T4['input']['seq2']))
+print(lcs_memo(T5['input']['seq1'],T5['input']['seq2']))
+print(lcs_memo(T6['input']['seq1'],T6['input']['seq2']))
+print(lcs_memo(T7['input']['seq1'],T7['input']['seq2']))
