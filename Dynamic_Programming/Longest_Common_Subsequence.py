@@ -83,35 +83,39 @@ T7 = {
 
 #recursive solution
 #Time complexity - O(2^m+n)
-def len_lcs(seq1,seq2,idx1 = 0,idx2 = 0):
-    if idx1 == len(seq1) or idx2 == len(seq2):
-        return 0
-    elif seq1[idx1] == seq2[idx2]:
-        return 1 + len_lcs(seq1,seq2,idx1 + 1,idx2 + 1)
-    else:
-        option1 = len_lcs(seq1,seq2,idx1 + 1,idx2)    
-        option2 = len_lcs(seq1,seq2,idx1,idx2 + 1)
-        return max(option1,option2)
+#Space Complexity: O(m+n) — recursion call stack
+def len_lcs(seq1,seq2,idx1 = 0,idx2 = 0): #take two sequences and two indexes(idx1 of seq1,idx2 of idx2 both staarting from 0)
+    if idx1 == len(seq1) or idx2 == len(seq2): #if any one sequence is exhausted,no more characters to compare
+        return 0                               #No common subsequence possible from here. Return 0.
+    elif seq1[idx1] == seq2[idx2]: #Current characters match — this character is part of the LCS.
+        return 1 + len_lcs(seq1,seq2,idx1 + 1,idx2 + 1) # Count it (+1) and recursively 
+        # call the functions and move both pointers forward to find more matches.    
+    else: #characters dont match,skip one character from either sequence and try both possibilities.
+        option1 = len_lcs(seq1,seq2,idx1 + 1,idx2)  
+        option2 = len_lcs(seq1,seq2,idx1,idx2 + 1)   
+        return max(option1,option2) #Take the maximum — whichever gives a longer subsequence.  
 
 #solution with memoization(memorization), we track recurring elements with a dictionary
+#Time complexity - O(m*n)
+#Space Complexity: O(m*n)
 def lcs_memo(seq1,seq2):
-    memo = {}
-    def recurse(idx1=0,idx2=0):
-        key = (idx1,idx2)
-        if key in memo:
-            return memo[key]
-        elif idx1 == len(seq1) or idx2 == len(seq2):
-            memo[key] = 0
-        elif seq1[idx1] == seq2[idx2]:
-            memo[key] = 1 + recurse(idx1+1,idx2+1)
+    memo = {} #we store already computed results for specific pairs(idx1,idx2)
+              #because of this we compute every unique pair only once
+    def recurse(idx1=0,idx2=0): #we create a helper function with idx1 = 0 and idx2 = 0
+        key = (idx1,idx2) #we store the pair
+        if key in memo: #if it is in already in memo
+            return memo[key] #return the computed result
+        elif idx1 == len(seq1) or idx2 == len(seq2): #same as recursion solution
+            memo[key] = 0 #the length is 0, store it in the memo
+        elif seq1[idx1] == seq2[idx2]: #same as recursion solution
+            memo[key] = 1 + recurse(idx1+1,idx2+1) #add one to result and increase both pointers
         else:
-            memo[key] = max(recurse(idx1+1,idx2),recurse(idx1,idx2+1))
-        return memo[key]
-    return recurse(0,0)
-                
-                    
-
+            memo[key] = max(recurse(idx1+1,idx2),recurse(idx1,idx2+1)) #check max and store the result in memo[key]
+        return memo[key] #return the result which is in memo[key]
+    return recurse(0,0) #make the initial call with idx1 = 0 and idx2 = 0
+            
 #testing
+# test_cases = [T0,T1,T2,T3,T4,T5,T6,T7]
 print(lcs_memo(T0['input']['seq1'],T0['input']['seq2']))
 print(lcs_memo(T1['input']['seq1'],T1['input']['seq2']))
 print(lcs_memo(T2['input']['seq1'],T2['input']['seq2']))
