@@ -113,14 +113,23 @@ def lcs_memo(seq1,seq2):
             memo[key] = max(recurse(idx1+1,idx2),recurse(idx1,idx2+1)) #check max and store the result in memo[key]
         return memo[key] #return the result which is in memo[key]
     return recurse(0,0) #make the initial call with idx1 = 0 and idx2 = 0
+
+#dynamic programming solution
+def lcs_dp(seq1,seq2):
+    n1,n2 = len(seq1),len(seq2)
+    table = [[0 for x in range(n2+1)]for x in range (n1+1)]
+    for i in range(n1):
+        for j in range(n2):
+            if seq1[i] == seq2[j]:
+                table[i+1][j+1] = 1 + table[i][j]
+            else:
+                table[i+1][j+1] = max(table[i][j+1],table[i+1][j])
+    return table[-1][-1]                    
             
 #testing
-# test_cases = [T0,T1,T2,T3,T4,T5,T6,T7]
-print(lcs_memo(T0['input']['seq1'],T0['input']['seq2']))
-print(lcs_memo(T1['input']['seq1'],T1['input']['seq2']))
-print(lcs_memo(T2['input']['seq1'],T2['input']['seq2']))
-print(lcs_memo(T3['input']['seq1'],T3['input']['seq2']))
-print(lcs_memo(T4['input']['seq1'],T4['input']['seq2']))
-print(lcs_memo(T5['input']['seq1'],T5['input']['seq2']))
-print(lcs_memo(T6['input']['seq1'],T6['input']['seq2']))
-print(lcs_memo(T7['input']['seq1'],T7['input']['seq2']))
+test_cases = [T0,T1,T2,T3,T4,T5,T6,T7]
+for i, test in enumerate(test_cases):
+    result = lcs_dp(test['input']['seq1'], test['input']['seq2'])
+    passed = result == test['output']
+    status = "PASSED" if passed else "FAILED"
+    print(f"Test {i}: {status} | Expected: {test['output']}, Got: {result}")
