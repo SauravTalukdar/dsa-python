@@ -115,16 +115,30 @@ def lcs_memo(seq1,seq2):
     return recurse(0,0) #make the initial call with idx1 = 0 and idx2 = 0
 
 #dynamic programming solution
+#we will create a 2D array to store combinations for both positions(i,j) for both sequences(seq1,seq2) together
+#Time complexity - O(n1*n2)
+#Space Complexity: O(n1*n2)
 def lcs_dp(seq1,seq2):
-    n1,n2 = len(seq1),len(seq2)
-    table = [[0 for x in range(n2+1)]for x in range (n1+1)]
-    for i in range(n1):
-        for j in range(n2):
-            if seq1[i] == seq2[j]:
-                table[i+1][j+1] = 1 + table[i][j]
-            else:
-                table[i+1][j+1] = max(table[i][j+1],table[i+1][j])
-    return table[-1][-1]                    
+    n1,n2 = len(seq1),len(seq2) #we are storing the lengths of both sequences(to use them for loops and size bounds)
+    table = [[0 for x in range(n2+1)]for x in range (n1+1)] #we are creating a row of n2+1 zeros(columns) 
+    #and n1+1 rows(this is the table),n1+1 and n2+1 as we want the empty string case to be handled
+    # For exaxmple - seq1="abc" (n1=3) and seq2="ac" (n2=2):
+    # n1+1 = 4 rows
+    # n2+1 = 3 columns
+    # table =
+    #     [0, 0, 0],   # row 0
+    #     [0, 0, 0],   # row 1
+    #     [0, 0, 0],   # row 2
+    #     [0, 0, 0],   # row 3
+    for i in range(n1): #iterate through every pair
+        for j in range(n2): 
+            if seq1[i] == seq2[j]: #characters match
+                table[i+1][j+1] = 1 + table[i][j] #length = 1 (this character) + LCS of everything before both characters
+                                                #(table[i][j] = diagonal cell).
+            else:#Characters don't match
+                table[i+1][j+1] = max(table[i][j+1],table[i+1][j])#table[i][j+1],cell above → skip current seq1 character
+            # table[i+1][j] — cell to left → skip current seq2 character, then take max of both(whichever gives longer lcs)
+    return table[-1][-1] #last row and last column element(or element at the last of last row), it is the lcs                  
             
 #testing
 test_cases = [T0,T1,T2,T3,T4,T5,T6,T7]
