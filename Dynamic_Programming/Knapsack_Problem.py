@@ -103,11 +103,24 @@ def max_profit_memo(weights,profits,capacity):
             option2 = profits[idx] + recurse(capacity - weights[idx],idx+1)
             memo[key] = max(option1,option2)
         return memo[key]
-    return recurse(capacity)           
+    return recurse(capacity)
+
+#Dynamic programming solution
+
+def knapsack_dp(weights,profits,capacity):
+    n = len(weights)
+    table = [[0 for _ in range(capacity+1)] for _ in range(n+1)]
+    for i in range(n):
+        for c in range(1,capacity+1):
+            if weights[i] > c:
+                table[i+1][c] = table[i][c]
+            else:
+                table[i+1][c] = max(table[i][c],profits[i] + table[i][c - weights[i]])
+    return table[-1][-1]                
 
 #testing
 for i, test in enumerate(tests):
-    result = max_profit_memo(**test['input'])
+    result = knapsack_dp(**test['input'])
     passed = result == test['output']
     status = "PASSED" if passed else "FAILED"
     print(f"Test {i}: {status} | Expected: {test['output']}, Got: {result}")
