@@ -106,17 +106,23 @@ def max_profit_memo(weights,profits,capacity):
     return recurse(capacity)
 
 #Dynamic programming solution
-
+#Time complexity:  O(n * capacity)
+#Space complexity: O(n * capacity)
 def knapsack_dp(weights,profits,capacity):
-    n = len(weights)
-    table = [[0 for _ in range(capacity+1)] for _ in range(n+1)]
-    for i in range(n):
-        for c in range(1,capacity+1):
-            if weights[i] > c:
-                table[i+1][c] = table[i][c]
+    n = len(weights) #storing the lenght of weights in n
+    table = [[0 for _ in range(capacity+1)] for _ in range(n+1)] #creating a table of rows:items(0 to n) and columns:capacity(0 to w)
+    #row 0 - no items considered yet
+    #column 0 - zero capacity
+    #table[i][c] means maximum profit using first i items with capacity c
+    for i in range(n): #i goes through each item(0 n-1)
+        for c in range(1,capacity+1): #c goes from 1 to w(it starts from one as no capacity(column 0)means no profit
+            if weights[i] > c: #if weight is greater than capacity
+                table[i+1][c] = table[i][c] #cant take current weight, copy the weight from row above
             else:
-                table[i+1][c] = max(table[i][c],profits[i] + table[i][c - weights[i]])
-    return table[-1][-1]                
+                table[i+1][c] = max(table[i][c],profits[i] + table[i][c - weights[i]]) #else take the max 
+                #1. table[i][c]  ← best profit without this item, same capacity
+                #2. Add item's profit + best profit from previous items with remaining capacity c - weights[i]
+    return table[-1][-1] #the max profit is at last column of last row (same as lcs)             
 
 #testing
 for i, test in enumerate(tests):
