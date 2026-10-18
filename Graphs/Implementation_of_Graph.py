@@ -2,7 +2,7 @@ num_nodes = 5 #number of nodes in the graph
 edges = [(0,1),(0,4),(1,2),(1,3),(1,4),(2,3),(3,4)] #these represent edges(connections) between the nodes
 #by these two information we can draw the graphg= in a peace of paper(but this is not the most efficient)
 
-#Q) Create a class to represent a graph as an adjacency list 
+#Q1) Create a class to represent a graph as an adjacency list 
 #Adjacency list - Each node stores a list of its direct neighbours
 
 class Graph:
@@ -35,6 +35,19 @@ class Graph:
 
 graph1 = Graph(num_nodes,edges)
 print(graph1)
+
+#Q2) Create a class to represent a graph as an adjacency matrix
+
+class Graph1:
+    def __init__(self,num_nodes,edges):
+        self.num_nodes = num_nodes
+        self.data = [[0 for _ in range(num_nodes)] for _ in range(num_nodes)]
+        for n1,n2 in edges:
+                self.data[n1][n2] = 1
+                self.data[n2][n1] = 1
+
+
+
 
 
 
