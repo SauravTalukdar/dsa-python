@@ -30,28 +30,29 @@ graph1 = Graph(num_nodes,edges)
 
 #implementing bfs
 def bfs(graph,root):
-    queue = []
-    discovered = [False] * len(graph.data)
-    distance = [None] * len(graph.data)
-    parent = [None] * len(graph.data)
+    queue = [] #nodes to process, visited but neighbours not yet checked
+    discovered = [False] * len(graph.data) #tracks which nodes have been seen, prevents revisiting
+    distance = [None] * len(graph.data) #how many edges from root to each node
+    parent = [None] * len(graph.data) #which node led to each node (useful for finding paths)
+    #All indexed by node number. For 5 nodes — each list has 5 elements.
 
-    discovered[root] = [True]
-    queue.append(root)
-    distance[root] = 0
-    idx = 0
+    discovered[root] = True #start from root mark it discovered
+    queue.append(root) #add root to queue
+    distance[root] = 0 #distance of root to itself is 0
+    idx = 0 #this tracks current position in queue
 
-    while idx < len(queue):
+    while idx < len(queue): #processes nodes one by one till its empty
         #dequeue
-        current = queue[idx]
-        idx += 1
+        current = queue[idx] #current node being processed
+        idx += 1 #advance to next node
 
-        #check all edges of current
-        for node in graph.data[current]:
-            if not discovered[node]:
-                distance[node] = 1 + distance[current]
-                parent[node] = current
-                discovered[node] = True
-                queue.append(node)
+        #check all edges of current(means check its neighbours)
+        for node in graph.data[current]: 
+            if not discovered[node]: #if not discovered do all these
+                distance[node] = 1 + distance[current] #distance is plus one
+                parent[node] = current #parent is the current node
+                discovered[node] = True #mark as discovered
+                queue.append(node) #add to the queue
 
     return queue,distance,parent     
 
