@@ -1,5 +1,5 @@
-num_nodes = 5 
-edges = [(0,1),(0,4),(1,2),(1,3),(1,4),(2,3),(3,4)]
+num_nodes = 9
+edges = [(0,1),(0,3),(1,2),(2,3),(4,5),(4,6),(5,6),(7,8)]
 
 class Graph:
     def __init__(self,num_nodes,edges):
@@ -56,5 +56,14 @@ def bfs(graph,root):
 
     return queue,distance,parent     
 
+#checking if all the nodes in the graph are connected
+def is_connected(graph):
+    queue, distance, parent = bfs(graph, 0) #run bfs from node 0
+    # if any node has distance None — it was never reached by BFS
+    # meaning it's in a separate disconnected component
+    # if no None in distance — all nodes were reached — graph is connected
+    return None not in distance #gives false if none in distance(otherwise checks if none is in distance->returns true)
+
 print(bfs(graph1,3))
+print(is_connected(graph1))
 
