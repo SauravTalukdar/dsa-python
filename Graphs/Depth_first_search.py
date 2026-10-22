@@ -48,3 +48,8 @@ def dfs(graph,root):
 
 
 print(dfs(graph1,3))
+
+# BFS vs DFS — The Key Difference
+# BFS → uses QUEUE → process oldest node first (FIFO)
+# DFS → uses STACK → process newest node first (LIFO)
+# This one difference makes BFS go wide and DFS go deep.
