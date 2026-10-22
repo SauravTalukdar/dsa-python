@@ -30,21 +30,21 @@ graph1 = Graph(num_nodes,edges)
 
 #implementing dfs
 def dfs(graph,root):
-    stack = []
-    discovered = [False] * len(graph.data)
-    result = []
+    stack = [] #nodes to process next
+    discovered = [False] * len(graph.data) #tracks visited nodes
+    result = [] #stores dfs traversal order
 
-    stack.append(root)
+    stack.append(root) #Push root onto stack,mark discovered at pop time not here 
 
-    while len(stack) > 0:
-        current = stack.pop()
-        if not discovered[current]:
-            discovered[current] = True
-            result.append(current)
-            for node in graph.data[current]:
+    while len(stack) > 0: #while there is element in stack
+        current = stack.pop() #Pop from top of stack and store in current — 
+        #always processes the most recently added node. This is what makes it go DEEP — latest neighbour gets processed first.
+        if not discovered[current]: #check if already discovered or not,because a node can be added to stack multiple times before being processed
+            discovered[current] = True #if not mark it discovered
+            result.append(current) #add the element to the result list
+            for node in graph.data[current]: #Push all undiscovered neighbours onto stack. processed in LIFO order
                 if not discovered[node]:
-                    stack.append(node)
-    return result                
+                    stack.append(node) 
 
 
 print(dfs(graph1,3))
