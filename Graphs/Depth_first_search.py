@@ -45,6 +45,7 @@ def dfs(graph,root):
             for node in graph.data[current]: #Push all undiscovered neighbours onto stack. processed in LIFO order
                 if not discovered[node]:
                     stack.append(node) 
+    return result                
 
 
 print(dfs(graph1,3))
