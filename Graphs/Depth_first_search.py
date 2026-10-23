@@ -33,6 +33,7 @@ def dfs(graph,root):
     stack = [] #nodes to process next
     discovered = [False] * len(graph.data) #tracks visited nodes
     result = [] #stores dfs traversal order
+    parent = [None] * len(graph.data)
 
     stack.append(root) #Push root onto stack,mark discovered at pop time not here 
 
@@ -44,6 +45,7 @@ def dfs(graph,root):
             result.append(current) #add the element to the result list
             for node in graph.data[current]: #Push all undiscovered neighbours onto stack. processed in LIFO order
                 if not discovered[node]:
+                    parent[node] = current
                     stack.append(node) 
     return result                
 
