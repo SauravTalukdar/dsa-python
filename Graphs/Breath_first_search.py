@@ -1,5 +1,5 @@
-num_nodes = 9
-edges = [(0,1),(0,3),(1,2),(2,3),(4,5),(4,6),(5,6),(7,8)]
+num_nodes = 5
+edges = [(0,1),(0,4),(1,2),(1,3),(1,4),(2,3),(3,4)]
 
 class Graph:
     def __init__(self,num_nodes,edges):
@@ -63,6 +63,45 @@ def is_connected(graph):
     # meaning it's in a separate disconnected component
     # if no None in distance — all nodes were reached — graph is connected
     return None not in distance #gives false if none in distance(otherwise checks if none is in distance->returns true)
+
+#full trace    
+# Graph edges: [(0,1),(0,4),(1,2),(1,3),(1,4),(2,3),(3,4)]
+
+# Node 3’s neighbours: [1, 2, 4]
+# Node 1’s neighbours: [0, 2, 3, 4] etc.
+
+# Start: queue=[3], discovered[3]=True, distance[3]=0
+
+# idx=0, current=3
+#     neighbours of 3: [1, 2, 4]
+#     1 not discovered → distance[1]=1, parent[1]=3, queue=[3,1]
+#     2 not discovered → distance[2]=1, parent[2]=3, queue=[3,1,2]
+#     4 not discovered → distance[4]=1, parent[4]=3, queue=[3,1,2,4]
+
+# idx=1, current=1
+#     neighbours of 1: [0, 2, 3, 4]
+#     0 not discovered → distance[0]=2, parent[0]=1, queue=[3,1,2,4,0]
+#     2 already discovered → skip
+#     3 already discovered → skip
+#     4 already discovered → skip
+
+# idx=2, current=2
+#     neighbours of 2: [1, 3]
+#     1 already discovered → skip
+#     3 already discovered → skip
+
+# idx=3, current=4
+#     neighbours of 4: [0, 1, 3]
+#     0 already discovered → skip
+#     1 already discovered → skip
+#     3 already discovered → skip
+
+# idx=4, current=0
+#     neighbours of 0: [1, 4]
+#     1 already discovered → skip
+#     4 already discovered → skip
+
+# idx=5 = len(queue) → loop ends
 
 print(bfs(graph1,3))
 print(is_connected(graph1))
