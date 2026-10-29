@@ -1,3 +1,9 @@
+# DFS - Depth First Search
+# Time Complexity: O(V + E) — visits every vertex and edge once
+# Space Complexity: O(V) — stack and discovered array
+# Key difference from BFS: uses stack instead of queue → goes deep first
+# Note: mark discovered at pop time, not push time — handles duplicate stack entries
+
 num_nodes = 5
 edges = [(0,1),(0,4),(1,2),(1,3),(1,4),(2,3),(3,4)]
 
@@ -38,7 +44,7 @@ def dfs(graph,root):
     stack.append(root) #Push root onto stack,mark discovered at pop time not here 
 
     while len(stack) > 0: #while there is element in stack
-        current = stack.pop() #Pop from top of stack and store in current — 
+        current = stack.pop() #Pop from top of stack and store in current
         #always processes the most recently added node. This is what makes it go DEEP — latest neighbour gets processed first.
         if not discovered[current]: #check if already discovered or not,because a node can be added to stack multiple times before being processed
             discovered[current] = True #if not mark it discovered
@@ -51,6 +57,38 @@ def dfs(graph,root):
 
 
 print(dfs(graph1,3))
+
+#full trace
+# stack=[3], discovered=[F,F,F,F,F]
+
+# pop 3 → not discovered → mark, result=[3]
+#     neighbours of 3: [1,2,4]
+#     push 1,2,4 → stack=[1,2,4]
+
+# pop 4 → not discovered → mark, result=[3,4]
+#     neighbours of 4: [0,1,3]
+#     3 discovered → skip
+#     push 0,1 → stack=[1,2,0,1]
+
+# pop 1 → not discovered → mark, result=[3,4,1]
+#     neighbours of 1: [0,2,3,4]
+#     4,3 discovered → skip
+#     push 0,2 → stack=[1,2,0,0,2]
+
+# pop 2 → not discovered → mark, result=[3,4,1,2]
+#     neighbours of 2: [1,3]
+#     both discovered → skip
+
+# pop 0 → not discovered → mark, result=[3,4,1,2,0]
+#     neighbours of 0: [1,4]
+#     both discovered → skip
+
+# pop 0 → already discovered → skip
+# pop 2 → already discovered → skip
+# pop 1 → already discovered → skip
+
+# stack empty → done
+# result = [3,4,1,2,0]
 
 # BFS vs DFS — The Key Difference
 # BFS → uses QUEUE → process oldest node first (FIFO)
