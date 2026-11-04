@@ -52,11 +52,11 @@ def subarray_sum(arr,target):
 def subarray_sum1(arr,target):
     n = len(arr)
     #i goes from 0 to n-1
-    for i in range(0,n):
+    for i in range(0,n): #i goes from 0 to one less than the last element
         #j goes from i to n
-        for j in range(i,n+1):
+        for j in range(i,n+1): #j goes from i(which is 0 at first) to n
             #check if subarray sum equals target
-            if sum(arr[i:j]) == target:
+            if sum(arr[i:j]) == target: #if we find the target in this range(eg- arr[2,6] = 4,2,1,3(then sum)==10)
                 #answer found
                 return i,j
     return None,None #if no subarray(or empty)      
@@ -77,12 +77,12 @@ def subarray_sum2(arr,target):
         s = 0 #running sum
         #j goes from i to n
         for j in range(i,n+1):
-            if s == target:
+            if s == target: #if our running sum is equal to target
                 return i,j 
-            elif s > target:
+            elif s > target: #if its greater than target we break it(as if we keep increasing j the value will only become greater,adding more number cant decrease the sum)
                 break
-            if j < n:
-                s += arr[j]
+            if j < n: #this is a guard so that our j doesnt go further than n(end element)
+                s += arr[j] #keep adding the next elements(arr[j]) to the running sum till we find if its equal to target
     return None,None            
 
 print(subarray_sum2(arr0,target0))           
@@ -95,17 +95,17 @@ print(subarray_sum2(arr3,target3))
 
 def subarray_sum3(arr,target):
     n = len(arr)
-    i,j,s = 0,0,0
-    while i < n and j < n+1:
-        if s == target:
+    i,j,s = 0,0,0 #we take i(left pointer), j(right pointer) and running sum s at 0
+    while i < n and j < n+1: #run i till one less than n and j till end
+        if s == target: #if found return
             return i,j
-        elif s < target:
-            if j < n:
-                s += arr[j]
-            j += 1
-        elif s > target:
-            s -= arr[i]
-            i += 1
+        elif s < target: #if running sum is less grow the window
+            if j < n: #guard
+                s += arr[j] #by adding j to the window
+            j += 1 #increase j(move the right pointer ahead)
+        elif s > target: #if running sum is more the sum is to big, we shrink the window
+            s -= arr[i] # we remove the leftmost number(i)
+            i += 1 #then increase the i(move the left pointer forward)
     return None,None
 
 print(subarray_sum3(arr0,target0))           
