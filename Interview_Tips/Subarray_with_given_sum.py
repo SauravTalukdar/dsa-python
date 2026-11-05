@@ -30,7 +30,7 @@ arr3 = [11,5,1,7,4,2,1,3]
 target3 = 25
 output3 = None,None
 
-
+#function signature
 def subarray_sum(arr,target):
     pass
 
@@ -46,7 +46,7 @@ def subarray_sum(arr,target):
 8. The subarray is a single element
 '''
 
-#brute force solution
+#1-brute force solution
 #Time complexity - O(n^3),n for i loop then n for j loop then n for the sum inside if block
 
 def subarray_sum1(arr,target):
@@ -60,12 +60,8 @@ def subarray_sum1(arr,target):
                 #answer found
                 return i,j
     return None,None #if no subarray(or empty)      
-
-print(subarray_sum1(arr0,target0))           
-print(subarray_sum1(arr1,target1))           
-print(subarray_sum1(arr2,target2))      
-
-#Running Sum(Optimized solution)
+   
+#2-Running Sum(Optimized solution)
 #maintain a running sum for the inner loop
 #when the running sum exceeds the target,break out of inner that loop
 #Time complextiy - O(n^2)
@@ -83,20 +79,16 @@ def subarray_sum2(arr,target):
                 break
             if j < n: #this is a guard so that our j doesnt go further than n(end element)
                 s += arr[j] #keep adding the next elements(arr[j]) to the running sum till we find if its equal to target
-    return None,None            
+    return None,None              
 
-print(subarray_sum2(arr0,target0))           
-print(subarray_sum2(arr1,target1))           
-print(subarray_sum2(arr2,target2))   
-print(subarray_sum2(arr3,target3))   
-
-#Sliding Window(Most optimized solution)
+#3-Sliding Window(Most optimized solution)
 #Time complexity - O(n)
 
 def subarray_sum3(arr,target):
     n = len(arr)
     i,j,s = 0,0,0 #we take i(left pointer), j(right pointer) and running sum s at 0
-    while i < n and j < n+1: #run i till one less than n and j till end
+    while i < n and j < n+1: #run i till n and j till end + 1
+        print(f"i:{i},j:{j},s:{s}") # to check each loops result
         if s == target: #if found return
             return i,j
         elif s < target: #if running sum is less grow the window
@@ -109,7 +101,7 @@ def subarray_sum3(arr,target):
     return None,None
 
 print(subarray_sum3(arr0,target0))           
-print(subarray_sum3(arr1,target1))           
-print(subarray_sum3(arr2,target2))   
-print(subarray_sum3(arr3,target3))  
+# print(subarray_sum3(arr1,target1))           
+# print(subarray_sum3(arr2,target2))   
+# print(subarray_sum3(arr3,target3))  
 
