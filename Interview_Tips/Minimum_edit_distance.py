@@ -59,11 +59,36 @@ def min_steps(str1,str2,i1=0,i2=0): #i1 is a pointer for str1,i2 is a pointer fo
         min_steps(str1,str2,i1+1,i2+1),#swapped
         min_steps(str1,str2,i1,i2+1))#inserted before
 
-print(min_steps(str1,str2))
-print(min_steps("", "abc"))                
-print(min_steps("abc", ""))                 
-print(min_steps("abc", "abc"))          
-print(min_steps("abc", "xyz")) 
+# print(min_steps(str1,str2))
+# print(min_steps("", "abc"))                
+# print(min_steps("abc", ""))                 
+# print(min_steps("abc", "abc"))          
+# print(min_steps("abc", "xyz")) 
+
+#memoization solution
+#Time complexity - O(m*n) 
+def min_steps_memo(str1,str2):
+    memo = {}
+    def recurse(i1,i2):
+        key = i1,i2
+        if key in memo:
+          return memo[key]
+        elif i1 == len(str1):
+          memo[key] = len(str2) - i2
+        elif i2 == len(str2):
+          memo[key] = len(str1) - i1
+        elif str1[i1] == str2[i2]:
+          memo[key] = recurse(i1+1,i2+1)
+        else:
+          memo[key] = 1 + min(recurse(i1+1,i2),recurse(i1+1,i2+1),recurse(i1,i2+1))
+        return memo[key]
+    return recurse(0,0)
+
+print(min_steps_memo(str1,str2))      
+print(min_steps_memo("", "abc"))                
+print(min_steps_memo("abc", ""))                 
+print(min_steps_memo("abc", "abc"))          
+print(min_steps_memo("abc", "xyz"))         
 
 
 
