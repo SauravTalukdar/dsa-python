@@ -1,4 +1,5 @@
-#Ask questions to get the whole picture of the problem(ask for examples to a question if not given already)
+#Tips
+##Ask questions to get the whole picture of the problem(ask for examples to a question if not given already)
 #Writing comments for code becomes code easier to read for the interviewer
 #We can explain brute force solution first verbally
 #Code the optimized solution or even convey what you want to do if you cant code it completely
