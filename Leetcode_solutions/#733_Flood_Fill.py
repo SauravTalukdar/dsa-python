@@ -47,7 +47,7 @@ sc4 = 1
 color4 = 9
 output4 = [[9,9],[9,9]]
 
-#solution
+#solution(bfs)
 def flood_fill(image,sr,sc,color):
     old_color = image[sr][sc] #Save the colour of the starting pixel before changing anything. This is the colour we’re replacing.
     if old_color == color: #If the new colour equals the old one, nothing changes
@@ -74,11 +74,34 @@ def flood_fill(image,sr,sc,color):
                 queue.append((nr,nc)) #add it to the queue, so that its neighbours get checked later 
     return image #return the updated image
 
-# print(flood_fill(image0,sr0,sc0,color0))                 
-# print(flood_fill(image1,sr1,sc1,color1))                 
-# print(flood_fill(image2,sr2,sc2,color2))                 
-# print(flood_fill(image3,sr3,sc3,color3))                 
-# print(flood_fill(image4,sr4,sc4,color4))      
+print(flood_fill(image0,sr0,sc0,color0))                 
+print(flood_fill(image1,sr1,sc1,color1))                 
+print(flood_fill(image2,sr2,sc2,color2))                 
+print(flood_fill(image3,sr3,sc3,color3))                 
+print(flood_fill(image4,sr4,sc4,color4))      
+
+# solution(dfs)
+def flood_fill_dfs(image,sr,sc,color):
+    old_color = image[sr][sc]
+    if old_color == color:
+        return image
+    rows = len(image)    
+    cols = len(image[0])
+
+    stack = [(sr,sc)]
+    image[sr][sc] = color
+
+    while len(stack) > 0:
+        r,c = stack.pop()
+        for dr,dc in [(1,0),(-1,0),(0,1),(0,-1)]:
+            nr,nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and image[nr][nc] == old_color:
+                image[nr][nc] = color
+                stack.append((nr,nc))
+    return image
+
+print(flood_fill_dfs(image0,sr0,sc0,color0))                 
+print(flood_fill_dfs(image1,sr1,sc1,color1))                 
 
 #Leetcode version
 class Solution:
