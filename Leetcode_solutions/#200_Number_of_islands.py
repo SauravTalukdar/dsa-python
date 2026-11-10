@@ -112,6 +112,32 @@ print(num_islands(grid3))
 print(num_islands(grid4))          
 print(num_islands(grid5))          
      
+#Leetcode solution
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        rows = len(grid)
+        cols = len(grid[0])
+        count = 0
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+
+        for i in range(rows):
+            for j in range(cols):
+                root = grid[i][j]
+                if root == "1":
+                    count +=1
+                    queue = [(i,j)]
+                    grid[i][j] = "0"
+                    idx = 0
+                    while idx < len(queue):
+                        r,c = queue[idx]
+                        idx +=1
+                        for dr,dc in directions:
+                            nr,nc = r + dr , c + dc
+                            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == "1":
+                                grid[nr][nc] = "0"
+                                queue.append((nr,nc))
+        return count                    
+
 
 
       
