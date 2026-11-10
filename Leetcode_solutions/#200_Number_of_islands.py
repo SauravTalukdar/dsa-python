@@ -78,7 +78,8 @@ grid5 = [
 ]
 Output5 = 1
 
-def num_islands(grid):
+#bfs solution
+def num_islands_bfs(grid):
   count = 0 #number of islands
   rows = len(grid)
   cols = len(grid[0])
@@ -105,13 +106,36 @@ def num_islands(grid):
                 
   return count #return number of islands
 
-print(num_islands(grid0))          
-print(num_islands(grid1))          
-print(num_islands(grid2))          
-print(num_islands(grid3))          
-print(num_islands(grid4))          
-print(num_islands(grid5))          
-     
+#dfs solution
+def num_islands_dfs(grid):
+    count = 0
+    rows = len(grid)
+    cols = len(grid[0])
+
+    for i in range(rows):
+        for j in range(cols):
+            root = grid[i][j]
+            if root == "1":
+                count +=1
+                stack = [(i,j)] 
+                grid[i][j] = "0"
+
+                while len(stack) > 0:
+                    r,c = stack.pop()
+                    for dr, dc in [(1,0),(-1,0),(0,1),(0,-1)]:
+                        nr,nc = r + dr,c + dc
+                        if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == "1":
+                            grid[nr][nc] = "0"
+                            stack.append((nr,nc))
+    return count          
+
+print(num_islands_dfs(grid0))          
+print(num_islands_dfs(grid1))          
+print(num_islands_dfs(grid2))          
+print(num_islands_dfs(grid3))          
+print(num_islands_dfs(grid4))          
+print(num_islands_dfs(grid5))  
+
 #Leetcode solution
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
