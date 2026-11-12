@@ -15,25 +15,23 @@ strs3 = ["bat","nat","tea"]
 Output3 = [["bat"],["nat"],["tea"]]
 
 strs4 = ["stop","tops","pots","spot"]
+Output4 = [["stop"],["tops"],["pots"],["spot"]]
 
-'''
-we can sort each word in the array and whichever word matches one another we can group them together.
-we can use a loop and sort every word in the array. and use another loopto check which mathches its sorted word. 
-then use list comprehension to group them together
-'''
+#brute force solution
 def group_anagram(strs):
-    result = [] 
-    discovered = False * len(strs)
-    for i in range(len(strs)):
-        var = [strs[i]]
-        if strs[i] not in result:
-            result.append(var)  
-        for j in range(i+1,len(strs)):
-            if str[j] is not discovered and sorted(strs[i]) == sorted(strs[j]):
-                var.append(strs[j])
-                discovered[j] = True
-
-    return result
-
+    result = [] #create a resulting list (which will contain list of lists)
+    discovered = [False] * len(strs) #create a way to mark the positions as discovered(to handle duplication)
+    for i in range(len(strs)): #run from position i to len(strs)
+        if not discovered[i]: #if we have not discovered i
+            group = [strs[i]] #create a group and put the element(i) in it
+            result.append(group) #add the group to the result 
+            discovered[i] = True #mark i as discovered
+            for j in range(i+1,len(strs)): #start another loop(j) from i+1 to len(strs)
+                if not discovered[j] and sorted(strs[i]) == sorted(strs[j]): #if j is not discovered and the sorted of i and j are equal
+                    group.append(strs[j]) #we add j to the group of this i
+                    discovered[j] = True #then mark j as discovered
+                    
+    #this will create the list of anagrams 
+    return result #return the result
 print(group_anagram(strs0))
 
