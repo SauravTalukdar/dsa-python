@@ -1,3 +1,9 @@
+# Problem: Group Anagrams
+# LeetCode: #49
+# Difficulty: Medium
+# Approach 1: brute force, compare every pair of sorted words, O(n² * k log k)
+# Approach 2: dictionary keyed by sorted word, O(n * k log k)
+
 '''
 Given an array of strings(strs), we need to group the anagrams together. You can return the answer in any order
 '''
@@ -20,7 +26,7 @@ Output4 = [["stop"],["tops"],["pots"],["spot"]]
 #brute force solution
 def group_anagram(strs):
     result = [] #create a resulting list (which will contain list of lists)
-    discovered = [False] * len(strs) #create a way to mark the positions as discovered(to handle duplication)
+    discovered = [False] * len(strs) #create a way to mark the positions as discovered(to handle duplication,prevents a word from joining two groups)
     for i in range(len(strs)): #run from position i to len(strs)
         if not discovered[i]: #if we have not discovered i
             group = [strs[i]] #create a group and put the element(i) in it
@@ -33,5 +39,20 @@ def group_anagram(strs):
                     
     #this will create the list of anagrams 
     return result #return the result
-print(group_anagram(strs0))
+# print(group_anagram(strs0))
 
+#optimized solution(dictionary key)
+def group_anagram1(strs):
+    groups = {}
+    for i in strs:
+        key = "".join(sorted(i))
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(i)
+    return list(groups.values())
+
+print(group_anagram1(strs0))
+print(group_anagram1(strs1))
+print(group_anagram1(strs2))
+print(group_anagram1(strs3))
+print(group_anagram1(strs4))
