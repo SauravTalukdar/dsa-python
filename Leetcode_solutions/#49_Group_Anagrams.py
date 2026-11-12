@@ -43,13 +43,13 @@ def group_anagram(strs):
 
 #optimized solution(dictionary key)
 def group_anagram1(strs):
-    groups = {}
-    for i in strs:
-        key = "".join(sorted(i))
-        if key not in groups:
-            groups[key] = []
-        groups[key].append(i)
-    return list(groups.values())
+        groups = {}
+        for i in strs:
+            key = "".join(sorted(i))
+            if key not in groups:
+                groups[key] = []
+            groups[key].append(i)
+        return list(groups.values())
 
 print(group_anagram1(strs0))
 print(group_anagram1(strs1))
