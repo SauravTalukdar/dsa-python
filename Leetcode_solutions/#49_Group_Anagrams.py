@@ -21,7 +21,7 @@ strs3 = ["bat","nat","tea"]
 Output3 = [["bat"],["nat"],["tea"]]
 
 strs4 = ["stop","tops","pots","spot"]
-Output4 = [["stop"],["tops"],["pots"],["spot"]]
+Output4 = [["stop","tops","pots","spot"]]
 
 #brute force solution
 def group_anagram(strs):
@@ -43,13 +43,27 @@ def group_anagram(strs):
 
 #optimized solution(dictionary key)
 def group_anagram1(strs):
-        groups = {}
-        for i in strs:
-            key = "".join(sorted(i))
-            if key not in groups:
-                groups[key] = []
-            groups[key].append(i)
-        return list(groups.values())
+    groups = {}
+    for i in strs:
+        key = "".join(sorted(i))
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(i)
+    return list(groups.values())
+
+#example trace
+# Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+# Word	sorted → key	New key?	groups after
+# eat	"aet"	yes, create []	{"aet": ["eat"]}
+# tea	"aet"	no	{"aet": ["eat","tea"]}
+# tan	"ant"	yes	{"aet": ["eat","tea"], "ant": ["tan"]}
+# ate	"aet"	no	{"aet": ["eat","tea","ate"], "ant": ["tan"]}
+# nat	"ant"	no	{"aet": [...3 words], "ant": ["tan","nat"]}
+# bat	"abt"	yes	{"aet": [...], "ant": [...], "abt": ["bat"]}
+
+# Final line: list(groups.values()) returns
+# [["eat","tea","ate"], ["tan","nat"], ["bat"]]
 
 print(group_anagram1(strs0))
 print(group_anagram1(strs1))
