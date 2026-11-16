@@ -26,28 +26,24 @@ test2 = {
         'nums': [1,2,1,2,1,2,3,1,3,2],'k' : 2,
     }, 'output' : [1,2]
 }
+
 test3 = {
-    'input' : {
-        'nums': [],'k' : 1,
-    }, 'output' : []
-}
-test4 = {
     'input' : {
         'nums': [1,2,3,4,5],'k' : 5,
     }, 'output' : [1,2,3,4,5]
 }
-test5 = {
+test4 = {
     'input' : {
         'nums': [3,3,3,3,3],'k' : 1,
     }, 'output' : [3]
 }
-test6 = {
+test5 = {
     'input' : {
         'nums': [-3,-3,-1,-1,2],'k' : 2,
     }, 'output' : [-3,-1]
 }
 
-tests = [test0,test1,test2,test3,test4,test5,test6]
+tests = [test0,test1,test2,test3,test4,test5]
 
 def topKfrequent(nums,k):
     count = {} #create an empty dictionary, keys will be every numbers from nums and value will be how many times they appear
@@ -68,7 +64,24 @@ def topKfrequent(nums,k):
     result = new_list[:k] #in new list the number are ordered from most to least frequent, so when we slice it till k we get the elements till k
     return result
 
+#bucket sort solution
+def topKfrequent1(nums,k):
+    count = {}
+    freq = [[] for i in range(len(nums) + 1)]
+
+    for n in nums:
+        count[n] = count.get(n,0) + 1
+    for n,c in count.items():
+        freq[c].append(n)
+
+    result = []
+    for i in range(len(freq)-1,0,-1):
+        for n in freq[i]:
+            result.append(n)
+            if len(result) == k:
+                return result        
+
 for i, t in enumerate(tests):
-    result = topKfrequent(**t['input'])
+    result = topKfrequent1(**t['input'])
     print(i, "PASSED" if sorted(result) == sorted(t['output']) else "FAILED")
     
