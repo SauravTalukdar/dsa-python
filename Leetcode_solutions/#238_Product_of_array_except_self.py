@@ -1,3 +1,12 @@
+# Problem: Product of Array Except Self
+# LeetCode: #238
+# Difficulty: Medium
+# Approach 1: brute force, for each i multiply every other element. O(n^2) time, O(1) extra space
+# Approach 2: left and right products, no division. Time: O(n) | Space: O(n)
+# Idea: answer[i] = (product of everything left of i) * (product of everything right of i)
+#       left[i+1] = left[i] * nums[i]
+#       right[j]  = right[j+1] * nums[j+1]
+
 '''
 Given an integer array nums, 
 return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
@@ -68,8 +77,18 @@ def arrProduct(nums):
 
 tests = [test0,test1,test2,test3,test4,test5,test6,test7]
 
+#approch 2
+def arrProduct1(nums):
+    left = [1]
+    right = [1] * len(nums)
+    for i in range(len(nums)-1):
+        left.append(left[i]*nums[i])
+    for j in range(len(nums)-2,-1,-1):
+        right[j] = nums[j+1]*right[j+1]    
+    return [left[i] * right[i] for i in range(len(nums))]    
+    
 for i,t in enumerate(tests):
-    result = arrProduct(**t['input'])
+    result = arrProduct1(**t['input'])
     print(i, "PASSED" if result == t['output'] else "FAILED")
 
 
