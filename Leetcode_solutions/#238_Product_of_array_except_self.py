@@ -64,28 +64,28 @@ test7 = {
     },'output' : [-3,2,-6]
 }
 
+tests = [test0,test1,test2,test3,test4,test5,test6,test7]
+
 #brute force solution
 def arrProduct(nums):
-    answer = []
+    answer = [] #store the product list
     for i in range(len(nums)):
-        product = 1
+        product = 1 
         for j in range(len(nums)):
-            if i != j:
-                product *= nums[j]
-        answer.append(product)
+            if i != j: #as our product will be everything minus the element(so when i not equal to j)
+                product *= nums[j] # multiply every other element into product
+        answer.append(product) #append each product to the result
     return answer
-
-tests = [test0,test1,test2,test3,test4,test5,test6,test7]
 
 #approch 2
 def arrProduct1(nums):
-    left = [1]
-    right = [1] * len(nums)
-    for i in range(len(nums)-1):
-        left.append(left[i]*nums[i])
-    for j in range(len(nums)-2,-1,-1):
-        right[j] = nums[j+1]*right[j+1]    
-    return [left[i] * right[i] for i in range(len(nums))]    
+    left = [1] #initialize left with 1 as we need a 1 to the left of the first number
+    right = [1] * len(nums) # everything else are placeholders; only the last slot (nothing to its right) contains a 1
+    for i in range(len(nums)-1): #stops one short: the last element never contributes to a left product
+        left.append(left[i]*nums[i]) #left[i] = product of everything before i; times nums[i] = product of everything before i+1 
+    for j in range(len(nums)-2,-1,-1): #from the second-to-last index down to 0 (the last is already 1)
+        right[j] = nums[j+1]*right[j+1] #right[j] = product of everything after j = next element * product after that
+    return [left[i] * right[i] for i in range(len(nums))] #multiply both those lists(left and right) and return the answer 
     
 for i,t in enumerate(tests):
     result = arrProduct1(**t['input'])
