@@ -142,7 +142,7 @@ def validSudoku2(board):
                 return False
             rows[r].add(cell)     
             cols[c].add(cell)     
-            squares[r//3,c//3].add(cell)
+            squares[(r//3,c//3)].add(cell)
     return True     
 
 # Why (r//3, c//3) identifies a box
