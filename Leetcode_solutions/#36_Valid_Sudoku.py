@@ -2,6 +2,7 @@
 # LeetCode: #36
 # Difficulty: Medium
 # Approach 1: three separate checks (rows, columns, 3x3 boxes), each with a fresh set. return True only after all pass.
+# Approach 2: single pass with sets keyed by row, column and box number
 # Time: O(1) for the fixed 9x9 board (about 243 cell visits); O(n^2) if generalised to an n x n board
 
 '''
@@ -82,7 +83,7 @@ test5 = [['.','.', '.', '.', '.', '.', '.', '.', '.'],
 tests = [(test0, True), (test1, False), (test2, False),
          (test3, False), (test4, False), (test5, True)]
 
-def sudoku(board):
+def validSudoku1(board):
     rows = len(board)
     cols = len(board[0])
 
@@ -121,8 +122,36 @@ def sudoku(board):
                         return False
                     seen.add(cell)
     return True #if all checks pass return True     
-                     
+
+from collections import defaultdict
+
+def validSudoku2(board):
+    rows = defaultdict(set) #sets for all rows
+    cols = defaultdict(set) #sets for all cols
+    squares = defaultdict(set) #here the key = (r/3,c/3) #sets for akk boxes
+
+    #loop over all cells
+    for r in range(9): 
+        for c in range(9):
+            cell = board[r][c]
+            if cell == ".":
+                continue
+            if (cell in rows[r] #has the cell appeared in row(r)
+                or cell in cols[c] #has the cell appeared in col(c)
+                or cell in squares[(r//3,c//3)]): #has the cell appeared in the box(r/3,c/3)
+                return False
+            rows[r].add(cell)     
+            cols[c].add(cell)     
+            squares[r//3,c//3].add(cell)
+    return True     
+
+# Why (r//3, c//3) identifies a box
+# Integer division maps 0-2 to 0, 3-5 to 1 and 6-8 to 2:
+# (r, c) = (4, 7)  →  (4//3, 7//3) = (1, 2)   middle row of boxes, right column
+# (r, c) = (0, 2)  →  (0, 0)                  top-left box
+# Every cell in the same box produces the same pair, so the pair works as a box ID.            
+
 for i, (board, expected) in enumerate(tests):
-    print(i, "PASSED" if sudoku(board) == expected else "FAILED")
+    print(i, "PASSED" if validSudoku2(board) == expected else "FAILED")
 
 
