@@ -2,7 +2,7 @@
 # LeetCode: #128
 # Difficulty: Medium
 # Approach 1: sort, then walk once keeping the current run and the best run. O(n log n) time, O(n) space
-# Approach 2: set, count only from numbers that start a run. O(n) time (to do)
+# Approach 2: set, count only from numbers that start a run. O(n) time, 0(n) space
 
 '''
 An unsorted array of integers,nums is given.
@@ -63,7 +63,7 @@ test7 = {
 
 tests = [test0,test1,test2,test3,test4,test5,test6,test7]
 
-def lcs(nums):
+def lcs1(nums):
     if not nums:
         return 0
     count = 1
@@ -80,6 +80,21 @@ def lcs(nums):
         best = max(best,count)    
     return best
 
+def lcs2(nums):
+    if not nums:
+        return 0
+    new_nums = set(nums)
+    best = 1
+    count = 1 
+    for x in new_nums:
+        if x - 1 not in new_nums:
+            count = 1 
+            while x + 1 in new_nums:
+                count +=1
+                x +=1
+        best = max(best,count)
+    return best            
+
 for i,t in enumerate(tests):
-    result = lcs(**t['input'])
+    result = lcs2(**t['input'])
     print(i, "PASSED" if result == t['output'] else "FAILED")
