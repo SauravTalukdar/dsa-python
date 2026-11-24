@@ -2,7 +2,7 @@
 # LeetCode: #128
 # Difficulty: Medium
 # Approach 1: sort, then walk once keeping the current run and the best run. O(n log n) time, O(n) space
-# Approach 2: set, count only from numbers that start a run. O(n) time, 0(n) space
+# Approach 2: set, count only from numbers that start a run. O(n) time, O(n) space
 
 '''
 An unsorted array of integers,nums is given.
@@ -63,6 +63,7 @@ test7 = {
 
 tests = [test0,test1,test2,test3,test4,test5,test6,test7]
 
+#sorting approach
 def lcs1(nums):
     if not nums:
         return 0
@@ -80,20 +81,25 @@ def lcs1(nums):
         best = max(best,count)    
     return best
 
+#set approach
 def lcs2(nums):
-    if not nums:
+    if not nums:  # empty list has no sequence
         return 0
-    new_nums = set(nums)
-    best = 1
-    count = 1 
-    for x in new_nums:
-        if x - 1 not in new_nums:
-            count = 1 
-            while x + 1 in new_nums:
+    new_nums = set(nums) # O(1) lookups, and duplicates disappear
+    best = 1  # any non-empty list has a run of at least 1
+    for x in new_nums:  # loop over the set, so duplicates can't repeat work
+        if x - 1 not in new_nums:  # x is the START of a run(count) if nothing sits just below it
+            count = 1    # a new run starts at length 1
+            while x + 1 in new_nums:  # walk upward while the next number exists
                 count +=1
                 x +=1
-        best = max(best,count)
-    return best            
+            best = max(best,count)   # keep the longest run seen so far
+    return best      
+
+# Why O(n) even with a while inside a for:
+# the while loop only runs from the start of a run, and each run is walked once,
+# so every number is visited at most about twice in total (once in the for, once in a walk).
+# Without the "x - 1 not in set" check, every number would start its own walk and it would be O(n^2).
 
 for i,t in enumerate(tests):
     result = lcs2(**t['input'])
