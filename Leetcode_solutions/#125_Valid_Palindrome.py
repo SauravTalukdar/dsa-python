@@ -1,3 +1,10 @@
+# Problem: Valid Palindrome
+# LeetCode: #125
+# Difficulty: Easy
+# Approach 1: build a cleaned lowercase string, compare it with its reverse. O(n) time, O(n) space
+# Approach 2: two pointers from both ends, skipping non-alphanumeric characters. O(n) time, O(1) space
+# Pattern: two pointers moving inward
+
 '''
 A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
 it reads the same forward and backward.
@@ -55,9 +62,28 @@ def valid_palindrome1(s):
     clean_text = "".join(char.lower() for char in s if char.isalnum())
     return clean_text == clean_text[::-1]
 
+#two pointer approach
+def valid_palindrome2(s):
+    left = 0
+    right = len(s) - 1
+    while left < right:
+        if not s[left].isalnum():
+            left += 1
+        elif not s[right].isalnum():
+            right -=1
+        elif s[left].lower() != s[right].lower():
+            return False
+        else:
+            left += 1
+            right -=1
+    return True
+
 for i,t in enumerate(tests):
-    result = valid_palindrome1(**t['input'])
+    result = valid_palindrome2(**t['input'])
     print(i, "PASSED" if result == t['output'] else "FAILED")
 
-
+#error log
+# Bug: pointer updates sat outside the if/elif chain, so skips also moved both pointers
+# Bug: compared .isalnum() results (booleans) instead of the characters
+# Rule: in a two-pointer loop, ask "which pointer moves in each branch?" and write it out
 
