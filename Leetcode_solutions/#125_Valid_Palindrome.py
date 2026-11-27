@@ -58,25 +58,25 @@ test6 = {
 tests = [test0,test1,test2,test3,test4,test5,test6]
 
 #brute force solution
-def valid_palindrome1(s):
-    clean_text = "".join(char.lower() for char in s if char.isalnum())
-    return clean_text == clean_text[::-1]
-
+def palindrome(s):
+  clean = "".join(char.lower() for char in s if char.isalnum()) # keep letters and digits only, lowercase
+  return clean == clean[::-1] # reads the same backwards?
+  
 #two pointer approach
-def valid_palindrome2(s):
-    left = 0
-    right = len(s) - 1
-    while left < right:
-        if not s[left].isalnum():
-            left += 1
-        elif not s[right].isalnum():
-            right -=1
-        elif s[left].lower() != s[right].lower():
-            return False
-        else:
-            left += 1
-            right -=1
-    return True
+  left = 0 
+  right = len(s) - 1  # one pointer at each end
+
+  while left < right: # stop when the pointers meet or cross
+    if not s[left].isalnum(): 
+      left +=1  # can't compare this one, skip it (only left moves)
+    elif not s[right].isalnum():
+      right -=1 # same on the right (only right moves)
+    elif s[left].lower() != s[right].lower():
+      return False # both are alphanumeric and they differ
+    else:
+      left += 1  # they match, so move both inward
+      right -=1
+  return True  # every pair matched   
 
 for i,t in enumerate(tests):
     result = valid_palindrome2(**t['input'])
